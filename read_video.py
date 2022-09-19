@@ -8,14 +8,15 @@ import numpy as np
 # define a video capture object
 vid = cv2.VideoCapture(0)
 
+lower = np.array([94, 87, 82])
+upper = np.array([109, 170, 237])
+
 while(True):
 	
 	# Capture the video frame
 	# by frame
 	ret, frame = vid.read()
 	hsv = cv2.cvtColor(frame,cv2.COLOR_BGR2HSV)
-	lower = np.array([94, 87, 82])
-	upper = np.array([109, 170, 237])
 	mask = cv2.inRange(hsv, lower, upper)
 	contours, hierarchy = cv2.findContours(mask, cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
 	try: hierarchy = hierarchy[0]
